@@ -17,8 +17,11 @@ typedef uint64_t u64;
 
 typedef struct Dstring Dstring;
 
+#define DSTRING_INC 50
+
 struct Dstring {
 	u64 len;
+	u64 allocated_size;
 	char* string;
 
 	bool (*get_input)(Dstring*);
@@ -73,6 +76,36 @@ bool push_dvec(DVec* self, double value);
 void pop_dvec(DVec* self);
 void clear_dvec(DVec* self);
 bool init_dvec(DVec* self);
+
+// Memg
+//-------------------------------------------------------------------------
+
+typedef struct Mem_Hash Mem_Hash;
+typedef struct Mem_Item Mem_Item;
+
+#define MEM_HASH_START_SIZE 7
+
+struct Mem_Hash {
+	bool is_changing_size;
+	u64 len;
+	u64 len_size;
+	u64 size;
+	Mem_Item** hash_map;
+};
+
+struct Mem_Item {
+	void* ptr;
+	Mem_Item* next;
+};
+
+bool is_prime(u64 num);
+u64 next_prime(u64 current_prime);
+bool init_mem_hash(Mem_Hash* self);
+bool add_mem_item_to_mem_hash(Mem_Hash* self, void* ptr);
+bool increase_len_mem_hash(Mem_Hash* self);
+void delete_mem_hash(Mem_Item** hash_map, u64 len);
+bool contains_ptr_mem_hash(Mem_Hash* self, void* ptr);
+void print_mem_hash(Mem_Hash* self);
 
 // DDouble
 //-------------------------------------------------------------------------

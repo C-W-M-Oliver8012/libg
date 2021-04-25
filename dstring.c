@@ -23,15 +23,20 @@ bool get_input_dstring(Dstring* self) {
 
 bool push_char_dstring(Dstring* self, char c) {
 	bool is_error = false;
+	
 	self->string[self->len] = c;
-	// plus two because self->len is updated to self->len + 1 below
-	char* temp = realloc(self->string, sizeof (char) * (self->len + 2));
-	if (temp != NULL) {
-		self->len = self->len + 1;
-		self->string = temp;
+	if (self->len + 1 == self->allocated_size) {
+		self->allocated_size = self->allocated_size + DSTRING_INC;
+		char* temp = realloc(self->string, sizeof (char) * self->allocated_size);
+		if (temp != NULL) {
+			self->len = self->len + 1;
+			self->string = temp;
+		} else {
+			printf("Failed to realloc string.\n");
+			is_error = true;
+		}
 	} else {
-		printf("Failed to realloc string.\n");
-		is_error = true;
+		self->len = self->len + 1;
 	}
 	self->string[self->len] = '\0';
 
@@ -73,7 +78,8 @@ bool init_dstring(Dstring* self) {
 	bool is_error = false;
 
 	self->len = 0;
-	self->string = calloc(self->len + 1, sizeof (char));
+	self->allocated_size = DSTRING_INC;
+	self->string = calloc(self->allocated_size, sizeof (char));
 	if (self->string == NULL) {
 		printf("Failed to init string.\n");
 		is_error = true;

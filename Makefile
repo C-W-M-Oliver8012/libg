@@ -3,12 +3,13 @@ lib_flags:= -std=c17 -Wall -Wextra -Werror
 debug_flags:= -std=c17 -Wall -Wextra -Werror -g
 release_flags:= -std=c17 -Wall -Wextra -Werror -static
 
-library: dstring.c ivec.c dvec.c
+library: dstring.c ivec.c dvec.c memg.c
 	$(cc) $(lib_flags) -c dstring.c
 	$(cc) $(lib_flags) -c ivec.c
 	$(cc) $(lib_flags) -c dvec.c
-	ar rcs libg.a dstring.o ivec.o dvec.o
-	rm dstring.o ivec.o dvec.o
+	$(cc) $(lib_flags) -c memg.c
+	ar rcs libg.a dstring.o ivec.o dvec.o memg.o
+	rm dstring.o ivec.o dvec.o memg.o
 
 debug: test.c
 	$(cc) $(debug_flags) test.c libg.a -o test
