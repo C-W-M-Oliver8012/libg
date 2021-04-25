@@ -56,7 +56,7 @@ bool add_mem_item_to_mem_hash(Mem_Hash* self, void* ptr) {
     }
 
     if (is_error == false) {
-        u64 hash_key = (u64)ptr % self->len;
+        u64 hash_key = (uintptr_t)ptr % self->len;
 
         if (self->hash_map[hash_key] == NULL) {
             self->hash_map[hash_key] = new_mem_item;
@@ -142,7 +142,7 @@ void delete_mem_hash(Mem_Item** hash_map, u64 len) {
 bool contains_ptr_mem_hash(Mem_Hash* self, void* ptr) {
     bool contains_ptr = false;
 
-    u64 hash_key = (u64)ptr % self->len;
+    u64 hash_key = (uintptr_t)ptr % self->len;
 
     if (self->hash_map[hash_key] != NULL) {
         Mem_Item* current_item = self->hash_map[hash_key];
@@ -170,10 +170,10 @@ void print_mem_hash(Mem_Hash* self) {
             Mem_Item* current_item = self->hash_map[i];
 
             while (current_item->next != NULL) {
-                printf("%p, ", current_item->ptr);
+                printf("%lu, ", (uintptr_t)current_item->ptr);
                 current_item = current_item->next;
             }
-            printf("%p, \n", current_item->ptr);
+            printf("%lu\n", (uintptr_t)current_item->ptr);
         }
     }
 }
