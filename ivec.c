@@ -1,6 +1,7 @@
 #include "libg.h"
 
-bool push_ivec(IVec* self, i64 value) {
+bool push_ivec(IVec* self, i64 value)
+{
 	bool is_error = false;
 	
 	self->vec[self->len] = value;
@@ -17,17 +18,20 @@ bool push_ivec(IVec* self, i64 value) {
 	return is_error;
 }
 
-void pop_ivec(IVec* self) {
+void pop_ivec(IVec* self)
+{
 	if (self->len >= 1) {
 		self->len = self->len - 1;
 	}
 }
 
-void clear_ivec(IVec* self) {
+void clear_ivec(IVec* self)
+{
 	free(self->vec);
 }
 
-bool init_ivec(IVec* self) {
+bool init_ivec(IVec* self)
+{
 	bool is_error = false;
 
 	self->len = 0;

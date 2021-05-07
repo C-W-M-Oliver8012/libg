@@ -1,6 +1,7 @@
 #include "libg.h"
 
-bool push_dvec(DVec* self, double value) {
+bool push_dvec(DVec* self, double value)
+{
 	bool is_error = false;
 
 	self->vec[self->len] = value;
@@ -17,17 +18,20 @@ bool push_dvec(DVec* self, double value) {
 	return is_error;
 }
 
-void pop_dvec(DVec* self) {
+void pop_dvec(DVec* self)
+{
 	if (self->len >= 1) {
 		self->len = self->len - 1;
 	}
 }
 
-void clear_dvec(DVec* self) {
+void clear_dvec(DVec* self)
+{
 	free(self->vec);
 }
 
-bool init_dvec(DVec* self) {
+bool init_dvec(DVec* self)
+{
 	bool is_error = false;
 
 	self->len = 0;

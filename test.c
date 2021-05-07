@@ -1,6 +1,7 @@
 #include "libg.h"
 
-int main(void) {
+int main(void)
+{
 	bool is_error = false;
 
 	Dstring input;

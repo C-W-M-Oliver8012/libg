@@ -1,6 +1,7 @@
 #include "libg.h"
 
-bool get_input_dstring(Dstring* self) {
+bool get_input_dstring(Dstring *self)
+{
 	bool is_error = false;
 	self->len = 0;
 	char c;
@@ -21,13 +22,15 @@ bool get_input_dstring(Dstring* self) {
 	return is_error;
 }
 
-bool push_char_dstring(Dstring* self, char c) {
+bool push_char_dstring(Dstring *self, char c)
+{
 	bool is_error = false;
 	
 	self->string[self->len] = c;
 	if (self->len + 1 == self->allocated_size) {
 		self->allocated_size = self->allocated_size + DSTRING_INC;
-		char* temp = realloc(self->string, sizeof (char) * self->allocated_size);
+		char *temp = realloc(self->string, 
+			sizeof(char) * self->allocated_size);
 		if (temp != NULL) {
 			self->len = self->len + 1;
 			self->string = temp;
@@ -43,7 +46,8 @@ bool push_char_dstring(Dstring* self, char c) {
 	return is_error;
 }
 
-bool push_string_dstring(Dstring* self, char *str) {
+bool push_string_dstring(Dstring *self, char *str)
+{
 	bool is_error = false;
 	u64 length = strlen(str);
 
@@ -56,7 +60,8 @@ bool push_string_dstring(Dstring* self, char *str) {
 	return is_error;
 }
 
-bool set_string_dstring(Dstring* self, char *str) {
+bool set_string_dstring(Dstring *self, char *str)
+{
 	bool is_error = false;
 	self->len = 0;
 	u64 length = strlen(str);
@@ -70,11 +75,13 @@ bool set_string_dstring(Dstring* self, char *str) {
 	return is_error;
 }
 
-void clear_dstring(Dstring* self) {
+void clear_dstring(Dstring *self)
+{
 	free(self->string);
 }
 
-bool init_dstring(Dstring* self) {
+bool init_dstring(Dstring *self)
+{
 	bool is_error = false;
 
 	self->len = 0;
