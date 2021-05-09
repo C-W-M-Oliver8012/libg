@@ -20,9 +20,8 @@ bool push_dvec(struct DVec *self, double value)
 
 void pop_dvec(struct DVec *self)
 {
-	if (self->len >= 1) {
+	if (self->len >= 1)
 		self->len = self->len - 1;
-	}
 }
 
 void clear_dvec(struct DVec *self)

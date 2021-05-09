@@ -33,6 +33,7 @@ struct Dstring
 	char *str;
 };
 
+bool read_file_dstring(struct Dstring *self, char *filename);
 bool get_input_dstring(struct Dstring* self);
 bool push_char_dstring(struct Dstring* self, char c);
 bool push_string_dstring(struct Dstring* self, char *str);

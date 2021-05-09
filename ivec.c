@@ -20,9 +20,8 @@ bool push_ivec(struct IVec *self, i64 value)
 
 void pop_ivec(struct IVec *self)
 {
-	if (self->len >= 1) {
+	if (self->len >= 1)
 		self->len = self->len - 1;
-	}
 }
 
 void clear_ivec(struct IVec *self)
