@@ -1,58 +1,67 @@
 #include "libg.h"
 
-bool get_input_dstring(Dstring *self)
+bool get_input_dstring(struct Dstring *self)
 {
 	bool is_error = false;
+
 	self->len = 0;
 	char c;
-	while ((c = getc(stdin))) {
+	while ((c = getc(stdin)) && is_error == false) {
 		if (c == EOF) {
 			printf("Error reading char.\n");
 			is_error = true;
-			break;
 		} else if (c == '\n') {
 			break;
 		}
 
-		is_error = self->push_char(self, c);
-		if (is_error == true) {
-			break;
-		}
+		is_error = push_char_dstring(self, c);
 	}
 	return is_error;
 }
 
-bool push_char_dstring(Dstring *self, char c)
+bool realloc_dstring(struct Dstring *self)
+{
+	bool is_error = false;
+
+	self->allocated_size = self->allocated_size + DSTRING_INC;
+	char *temp = realloc(self->str, 
+		sizeof(char) * self->allocated_size);
+	if (temp != NULL) {
+		self->len = self->len + 1;
+		self->str = temp;
+	} else {
+		printf("Failed to realloc string.\n");
+		is_error = true;
+	}
+
+	return is_error;
+}
+
+bool push_char_dstring(struct Dstring *self, char c)
 {
 	bool is_error = false;
 	
-	self->string[self->len] = c;
+	self->str[self->len] = c;
 	if (self->len + 1 == self->allocated_size) {
-		self->allocated_size = self->allocated_size + DSTRING_INC;
-		char *temp = realloc(self->string, 
-			sizeof(char) * self->allocated_size);
-		if (temp != NULL) {
-			self->len = self->len + 1;
-			self->string = temp;
-		} else {
-			printf("Failed to realloc string.\n");
+		if (realloc_dstring(self) == true) {
 			is_error = true;
 		}
 	} else {
 		self->len = self->len + 1;
 	}
-	self->string[self->len] = '\0';
+	self->str[self->len] = '\0';
 
 	return is_error;
 }
 
-bool push_string_dstring(Dstring *self, char *str)
+bool push_string_dstring(struct Dstring *self, char *str)
 {
 	bool is_error = false;
+
 	u64 length = strlen(str);
 
 	for (u64 i = 0; i < length; i++) {
-		is_error = self->push_char(self, str[i]);
+		is_error = push_char_dstring(self, str[i]);
 		if (is_error == true) {
 			break;
 		}
@@ -60,14 +69,14 @@ bool push_string_dstring(Dstring *self, char *str)
 	return is_error;
 }
 
-bool set_string_dstring(Dstring *self, char *str)
+bool set_string_dstring(struct Dstring *self, char *str)
 {
 	bool is_error = false;
 	self->len = 0;
 	u64 length = strlen(str);
 
 	for (u64 i = 0; i < length; i++) {
-		is_error = self->push_char(self, str[i]);
+		is_error = push_char_dstring(self, str[i]);
 		if (is_error == true) {
 			break;
 		}
@@ -75,28 +84,22 @@ bool set_string_dstring(Dstring *self, char *str)
 	return is_error;
 }
 
-void clear_dstring(Dstring *self)
+void clear_dstring(struct Dstring *self)
 {
-	free(self->string);
+	free(self->str);
 }
 
-bool init_dstring(Dstring *self)
+bool init_dstring(struct Dstring *self)
 {
 	bool is_error = false;
 
 	self->len = 0;
 	self->allocated_size = DSTRING_INC;
-	self->string = calloc(self->allocated_size, sizeof (char));
-	if (self->string == NULL) {
+	self->str = calloc(self->allocated_size, sizeof(char));
+	if (self->str == NULL) {
 		printf("Failed to init string.\n");
 		is_error = true;
 	}
-
-	self->get_input = get_input_dstring;
-	self->push_char = push_char_dstring;
-	self->push_string = push_string_dstring;
-	self->set_string = set_string_dstring;
-	self->clear = clear_dstring;
 
 	return is_error;
 }

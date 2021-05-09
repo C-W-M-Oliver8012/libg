@@ -9,72 +9,64 @@
 #include <string.h>
 #include <stdint.h>
 
+typedef __int128_t i128;
 typedef int64_t i64;
+typedef int32_t i32;
+typedef int16_t i16;
+typedef int8_t i8;
+
+typedef __uint128_t u128;
 typedef uint64_t u64;
+typedef uint32_t u32;
+typedef uint16_t u16;
+typedef uint8_t u8;
 
 // Dstring
-//--------------------------------------------------------------------------
-
-typedef struct Dstring Dstring;
+//------------------------------------------------------------------------------
 
 #define DSTRING_INC 50
 
-struct Dstring {
+struct Dstring 
+{
 	u64 len;
 	u64 allocated_size;
-	char* string;
-
-	bool (*get_input)(Dstring*);
-	bool (*push_char)(Dstring*, char);
-	bool (*push_string)(Dstring*, char*);
-	bool (*set_string)(Dstring*, char*);
-	void (*clear)(Dstring*);
+	char *str;
 };
 
-bool get_input_dstring(Dstring* self);
-bool push_char_dstring(Dstring* self, char c);
-bool push_string_dstring(Dstring* self, char *str);
-void clear_dstring(Dstring* self);
-bool init_dstring(Dstring* self);
+bool get_input_dstring(struct Dstring* self);
+bool push_char_dstring(struct Dstring* self, char c);
+bool push_string_dstring(struct Dstring* self, char *str);
+void clear_dstring(struct Dstring* self);
+bool init_dstring(struct Dstring* self);
 
 
 // IVec
-//-------------------------------------------------------------------------
+//------------------------------------------------------------------------------
 
-typedef struct IVec IVec;
-
-struct IVec {
+struct IVec
+{
 	u64 len;
-	i64* vec;
-
-	bool (*push)(IVec*, i64);
-	void (*pop)(IVec*);
-	void (*clear)(IVec*);
+	i64 *vec;
 };
 
-bool push_ivec(IVec* self, i64 value);
-void pop_ivec(IVec* self);
-void clear_ivec(IVec* self);
-bool init_ivec(IVec* self);
+bool push_ivec(struct IVec *self, i64 value);
+void pop_ivec(struct IVec *self);
+void clear_ivec(struct IVec *self);
+bool init_ivec(struct IVec *self);
 
 
 // DVec
-//-------------------------------------------------------------------------
+//------------------------------------------------------------------------------
 
-typedef struct DVec DVec;
-
-struct DVec {
+struct DVec
+{
 	u64 len;
-	double* vec;
-
-	bool (*push)(DVec*, double);
-	void (*pop)(DVec*);
-	void (*clear)(DVec*);
+	double *vec;
 };
 
-bool push_dvec(DVec* self, double value);
-void pop_dvec(DVec* self);
-void clear_dvec(DVec* self);
-bool init_dvec(DVec* self);
+bool push_dvec(struct DVec *self, double value);
+void pop_dvec(struct DVec *self);
+void clear_dvec(struct DVec *self);
+bool init_dvec(struct DVec *self);
 
 #endif

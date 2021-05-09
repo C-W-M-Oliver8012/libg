@@ -4,17 +4,17 @@ int main(void)
 {
 	bool is_error = false;
 
-	Dstring input;
+	struct Dstring input;
 	if (init_dstring(&input) == true) {
 		is_error = true;
 	}
 
-	while (strcmp(input.string, "quit")) {
-		if (input.get_input(&input) == true) {
+	while (strcmp(input.str, "quit")) {
+		if (get_input_dstring(&input) == true) {
 			is_error = true;
 		}
-		printf("%s\n\n", input.string);
+		printf("%s\n\n", input.str);
 	}
-	input.clear(&input);
+	clear_dstring(&input);
 	return is_error;
 }
