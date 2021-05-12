@@ -18,7 +18,7 @@ bool read_file_dstring(struct Dstring *self, char *filename)
 		}
 		fclose(file);
 	} else {
-		printf("Failed to open file.\n");
+		printf("Failed to open file '%s'.\n", filename);
 		is_error = true;
 	}
 
