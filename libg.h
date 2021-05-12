@@ -28,17 +28,17 @@ typedef uint8_t u8;
 
 struct Dstring 
 {
-	u64 len;
-	u64 allocated_size;
+	size_t len;
+	size_t allocated_size;
 	char *str;
 };
 
 bool read_file_dstring(struct Dstring *self, char *filename);
-bool get_input_dstring(struct Dstring* self);
-bool push_char_dstring(struct Dstring* self, char c);
-bool push_string_dstring(struct Dstring* self, char *str);
-void clear_dstring(struct Dstring* self);
-bool init_dstring(struct Dstring* self);
+bool get_input_dstring(struct Dstring *self);
+bool push_char_dstring(struct Dstring *self, char c);
+bool push_string_dstring(struct Dstring *self, char *str);
+void clear_dstring(struct Dstring *self);
+bool init_dstring(struct Dstring *self);
 
 
 // IVec
@@ -46,11 +46,11 @@ bool init_dstring(struct Dstring* self);
 
 struct IVec
 {
-	u64 len;
-	i64 *vec;
+	size_t len;
+	intmax_t *vec;
 };
 
-bool push_ivec(struct IVec *self, i64 value);
+bool push_ivec(struct IVec *self, intmax_t value);
 void pop_ivec(struct IVec *self);
 void clear_ivec(struct IVec *self);
 bool init_ivec(struct IVec *self);
@@ -61,7 +61,7 @@ bool init_ivec(struct IVec *self);
 
 struct DVec
 {
-	u64 len;
+	size_t len;
 	double *vec;
 };
 

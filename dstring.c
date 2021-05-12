@@ -51,8 +51,7 @@ bool realloc_dstring(struct Dstring *self)
 	bool is_error = false;
 
 	self->allocated_size = self->allocated_size + DSTRING_INC;
-	char *temp = realloc(self->str, 
-		sizeof(char) * self->allocated_size);
+	char *temp = realloc(self->str, sizeof(char) * self->allocated_size);
 	if (temp != NULL) {
 		self->len = self->len + 1;
 		self->str = temp;
@@ -85,9 +84,9 @@ bool push_string_dstring(struct Dstring *self, char *str)
 {
 	bool is_error = false;
 
-	u64 length = strlen(str);
+	size_t length = strlen(str);
 
-	for (u64 i = 0; i < length; i++) {
+	for (size_t i = 0; i < length; i++) {
 		is_error = push_char_dstring(self, str[i]);
 		if (is_error)
 			break;
@@ -100,9 +99,9 @@ bool set_string_dstring(struct Dstring *self, char *str)
 {
 	bool is_error = false;
 	self->len = 0;
-	u64 length = strlen(str);
+	size_t length = strlen(str);
 
-	for (u64 i = 0; i < length; i++) {
+	for (size_t i = 0; i < length; i++) {
 		is_error = push_char_dstring(self, str[i]);
 		if (is_error)
 			break;
