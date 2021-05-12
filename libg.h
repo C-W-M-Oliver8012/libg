@@ -31,10 +31,13 @@ struct Dstring
 	char *str;
 };
 
+bool write_file_dstring(struct Dstring *self, char *filename);
+bool append_file_dstring(struct Dstring *self, char *filename);
 bool read_file_dstring(struct Dstring *self, char *filename);
 bool get_input_dstring(struct Dstring *self);
 bool push_char_dstring(struct Dstring *self, char c);
 bool push_string_dstring(struct Dstring *self, char *str);
+bool set_string_dstring(struct Dstring *self, char *str);
 void clear_dstring(struct Dstring *self);
 bool init_dstring(struct Dstring *self);
 

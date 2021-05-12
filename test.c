@@ -14,7 +14,8 @@ int main(void)
 		printf("%s\n\n", input.str);
 	}
 
-	read_file_dstring(&input, "hello_world.txt");
+	set_string_dstring(&input, "Caden is the best.\n");
+	write_file_dstring(&input, "hello_world.txt");
 	printf("%s", input.str);
 
 	clear_dstring(&input);

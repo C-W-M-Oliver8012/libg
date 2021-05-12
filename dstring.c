@@ -1,5 +1,41 @@
 #include "libg.h"
 
+bool write_file_dstring(struct Dstring *self, char *filename)
+{
+	bool is_error = false;
+
+	FILE *file = fopen(filename, "w");
+	if (file != NULL) {
+		if ((fputs(self->str, file) == EOF))
+			is_error = true;
+		
+		fclose(file);
+	} else {
+		printf("Failed to open file '%s'.\n", filename);
+		is_error = true;
+	}
+
+	return is_error;
+}
+
+bool append_file_dstring(struct Dstring *self, char *filename)
+{
+	bool is_error = false;
+
+	FILE *file = fopen(filename, "a");
+	if (file != NULL) {
+		if ((fputs(self->str, file) == EOF))
+			is_error = true;
+		
+		fclose(file);
+	} else {
+		printf("Failed to open file '%s'.\n", filename);
+		is_error = true;
+	}
+
+	return is_error;
+}
+
 bool read_file_dstring(struct Dstring *self, char *filename)
 {
 	bool is_error = false;
