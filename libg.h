@@ -1,8 +1,6 @@
 #ifndef LIBG
 #define LIBG
 
-#define TYPE int
-
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
