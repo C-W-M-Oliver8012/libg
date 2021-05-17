@@ -120,9 +120,9 @@ bool push_string_dstring(struct Dstring *self, char *str)
 {
 	bool is_error = false;
 
-	size_t length = strlen(str);
+	uintmax_t length = strlen(str);
 
-	for (size_t i = 0; i < length; i++) {
+	for (uintmax_t i = 0; i < length; i++) {
 		is_error = push_char_dstring(self, str[i]);
 		if (is_error)
 			break;
@@ -135,9 +135,9 @@ bool set_string_dstring(struct Dstring *self, char *str)
 {
 	bool is_error = false;
 	self->len = 0;
-	size_t length = strlen(str);
+	uintmax_t length = strlen(str);
 
-	for (size_t i = 0; i < length; i++) {
+	for (uintmax_t i = 0; i < length; i++) {
 		is_error = push_char_dstring(self, str[i]);
 		if (is_error)
 			break;

@@ -26,8 +26,8 @@ typedef uint8_t u8;
 
 struct Dstring 
 {
-	size_t len;
-	size_t allocated_size;
+	uintmax_t len;
+	uintmax_t allocated_size;
 	char *str;
 };
 
@@ -47,7 +47,7 @@ bool init_dstring(struct Dstring *self);
 
 struct IVec
 {
-	size_t len;
+	uintmax_t len;
 	intmax_t *vec;
 };
 
@@ -62,7 +62,7 @@ bool init_ivec(struct IVec *self);
 
 struct DVec
 {
-	size_t len;
+	uintmax_t len;
 	double *vec;
 };
 
