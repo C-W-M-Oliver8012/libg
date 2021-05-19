@@ -7,17 +7,15 @@
 #include <string.h>
 #include <stdint.h>
 
-typedef __int128_t i128;
-typedef int64_t i64;
-typedef int32_t i32;
-typedef int16_t i16;
-typedef int8_t i8;
+typedef int_least64_t i64;
+typedef int_least32_t i32;
+typedef int_least16_t i16;
+typedef int_least8_t i8;
 
-typedef __uint128_t u128;
-typedef uint64_t u64;
-typedef uint32_t u32;
-typedef uint16_t u16;
-typedef uint8_t u8;
+typedef uint_least64_t u64;
+typedef uint_least32_t u32;
+typedef uint_least16_t u16;
+typedef uint_least8_t u8;
 
 // Dstring
 //------------------------------------------------------------------------------
